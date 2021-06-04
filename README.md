@@ -20,7 +20,7 @@ VaccImageは以下の環境で動作を確認しておりまkす。
 - 80番ポートを邪魔するようなアプリ(SKYPEなど)は予め削除することをオススメします。
 
 ## クライアント側
-- Windows 10 Home環境下での、
+- Windows 10 Pro/Home環境下での、
     - Edge Browser
     - Internet Explorer
     - Chrome Browser
@@ -298,3 +298,4 @@ chmod +r /opt/lampp/htdocs/vaccimage/PageShowInfluenzaResult.php
 Mail: yoh.yasushi@gmail.com  
 Twitter: https://twitter.com/Yoh_Yasushi  
 GitHub: https://github.com/YohYasushi
+Blog: https://yohyasushi.blogspot.com/
