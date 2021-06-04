@@ -1,0 +1,19 @@
+﻿
+{
+    
+    "DepartmentSite" :    [
+
+{    "name" : "内科" , "Department" : "Naika" },
+{    "name" : "1A病棟" , "Department" : "1Award" },
+{    "name" : "2A病棟" , "Department" : "2Award"},
+{    "name" : "3A病棟" , "Department" : "3Award" },
+{    "name" : "4A病棟" , "Department" : "4Award" },
+{    "name" : "5A病棟" , "Department" : "5Award" },
+{    "name" : "医事課" , "Department" : "Ijika" },
+{    "name" : "検査部" , "Department" : "Kensa" },
+{    "name" : "放射線部" , "Department" : "Houka" },
+{    "name" : "外来" , "Department" : "Gairai" },
+{    "name" : "外科" , "Department" : "Geka" }
+
+]
+}
