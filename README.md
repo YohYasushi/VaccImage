@@ -4,8 +4,8 @@ VaccImageは、イントラネット内においてワクチン接種者およ�
 セキュリティ対策は必要最小限度となっております。運用時に注意するようにしてください。  
 なお、GitHubでのバージョン管理は当分は**フォルダごと**、のみとします。
 
-Windows10での環境構築については、スクショを用いて「vaccimageWin10Install.pdf」にアップいたしました。
-**この「README.md」と「vaccimageWin10Install.pdf」の両方をご覧いただき、インストール、セットアップの参考にしていただけましたら幸いです。**  
+Windows10での環境構築については、スクショを用いて「vaccimageWin10Install.pdf」にアップいたしました。「vaccimageWin10SetUpHowTo.pdf」もあります。
+**この「README.md」と「vaccimageWin10Install.pdf」、vaccimageWin10SetUpHowTo.pdfの3つをご覧いただき、インストール、セットアップの参考にしていただけましたら幸いです。**  
 また、より適したCodeなどの情報提供も歓迎です。当方、*PHP* & *SQL* はまだ初学者なので…。
 
 # 動作環境について
@@ -277,7 +277,7 @@ chmod +r /opt/lampp/htdocs/vaccimage/PageShowInfluenzaResult.php
 
 # Q&A
 - サーバー側がWindowsOSでの稼働を確認していない理由は？  
- -> WindowsServerが非常に高価であることと、通常のWindowsのHomeやProではサーバー機能を有していないため(非公式ながらWindowsは同時アクセス台数が10台までに制限されているとのこと)。
+ -> WindowsServerが非常に高価であることと、通常のWindowsのHomeやProではサーバー機能を有していないため(非公式ながらWindowsは同時アクセス台数が10台までに制限されているとのこと)。Windows10Proでの接続台数が限られた環境での稼働は確認しております。
 
 - インフルエンザワクチン以外への対応は？  
  -> いずれ実装予定です。ファイザー、モデルナ、アストラゼネカの新型コロナウイルス感染症ワクチンに対応したいと考えております。
