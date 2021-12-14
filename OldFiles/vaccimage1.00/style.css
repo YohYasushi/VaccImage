@@ -1,0 +1,52 @@
+body {
+    background-color: #f8fbf8; /*白磁色*/
+}
+
+a:link {
+    color:navy;
+}
+
+a:visited {
+    color:navy;
+}
+
+a:hover {
+    color:#ff6600;
+}
+
+table {
+	background-color:#f8fbf8; /*白磁色*/
+    border:width 1px;
+	border-style:solid;
+}
+
+th {
+    text-align: center;
+    font-size:0.9em;
+}
+
+td {
+    text-align: center;
+    font-size:0.9em;
+    border-bottom: 1px solid;
+}
+
+
+h1 {
+    font-size:1.3em;
+}
+
+h2 {
+    font-size:1.1em;
+}
+
+.annotation {
+    font-size:0.9em;
+    ;
+}
+
+.ftlink {
+    font-size:0.9em;
+    ;
+}
+
