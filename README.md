@@ -297,8 +297,8 @@ chmod +r /opt/lampp/htdocs/vaccimage/PageShowInfluenzaResult.php
  -> 状況に応じて、不定期です。GitHub上で更新していきます。
 
 # 問い合わせ先
-Mail: yoh.yasushi@gmail.com  
+Mail: yoh.yasushi@gmail.com 
 Twitter: https://twitter.com/Yoh_Yasushi  
-GitHub: https://github.com/YohYasushi
-Qiita: https://qiita.com/Yoh_Yasushi
-Blog: https://yohyasushi.blogspot.com/
+GitHub: https://github.com/YohYasushi 
+Qiita: https://qiita.com/Yoh_Yasushi 
+Blog: https://yohyasushi.blogspot.com/ 
