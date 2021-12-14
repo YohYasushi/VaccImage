@@ -277,7 +277,7 @@ chmod +r /opt/lampp/htdocs/vaccimage/PageShowInfluenzaResult.php
 
 # Q&A
 - サーバー側がWindowsOSでの稼働を確認していない理由は？  
- -> WindowsServerが非常に高価であることと、通常のWindowsのHomeやProではサーバー機能を有していないため(非公式ながらWindowsは同時アクセス台数が10台までに制限されているとのこと)。Windows10Proでの接続台数が限られた環境での稼働は確認しております。
+ -> WindowsServerが非常に高価であることと、通常のWindowsのHomeやProではサーバー機能を有していないため(非公式情報Windowsは同時アクセス台数が10台までに制限されているとのこと)。Windows10Proでの接続台数が限られた環境での稼働は確認しております。
 
 - インフルエンザワクチン以外への対応は？  
  -> いずれ実装予定です。ファイザー、モデルナ、アストラゼネカの新型コロナウイルス感染症ワクチンに対応したいと考えております。
@@ -289,7 +289,7 @@ chmod +r /opt/lampp/htdocs/vaccimage/PageShowInfluenzaResult.php
  -> 当日接種については、未接種ふくめての全カウントを当日朝から出すようにしております。しかし前日までの未接種と明日以後の接種者はカウントしません。不適切な入力は間違ったカウントの元になるので注意してください。事後でもいいので過去の接種分と未来日の予約をきちんと入力してください。
 
 - バイアル数のカウントの区切りについてはどう考えていますか？  
- -> ワクチン接種の管理するMySQLのデータベースは一つなので、PHP側で人為的に区切る設定にしております。正確には、PageShowInfluenzaResult.phpのPHPをご参照いただき、tableに出力する範囲を設定することでバイアル数をカウントする仕様です。詳しくは、"バイアル数のカウントのページについて"の項を御覧ください。
+ -> 2021/12/14記載。以前のHTMLをいちいち編集するのは大いに問題があるのでバイアル種類の違い、期間区切り含めてSQLでの運用を目指します。
 
 - 今後の更新頻度は？  
  -> 状況に応じて、不定期です。GitHub上で更新していきます。
@@ -298,4 +298,5 @@ chmod +r /opt/lampp/htdocs/vaccimage/PageShowInfluenzaResult.php
 Mail: yoh.yasushi@gmail.com  
 Twitter: https://twitter.com/Yoh_Yasushi  
 GitHub: https://github.com/YohYasushi
+Qiita: https://qiita.com/Yoh_Yasushi
 Blog: https://yohyasushi.blogspot.com/
