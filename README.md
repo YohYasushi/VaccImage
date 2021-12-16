@@ -12,6 +12,8 @@ VaccImage(ばっくいまーじゅ)は、イントラネット内においてワ
 - Ubuntu 20.04.2 LTS(最小構成)
 - CentOS Stream 8
 - Windows10 Pro(Homeでは試してませんがおそらく問題ないものと思われます)。
+ただし、
+- 推奨OSは18.04以降のUbuntuとします(WindowsServerOSでの動作は確認しておりません)。
 - (PHPのBCMathについてはXamppに最初からインストールされておりました。ない場合はバイアル数の計算のためにインストールしていただく必要があります。)
 - GUIなしのUbuntuServerでは事実上設定が困難と思われます。
 - 80番ポートを邪魔するようなアプリ(SKYPEなど)は予め削除することをオススメします。
@@ -72,7 +74,7 @@ http://localhost
 sudo yum install libnsl
 ```
 を行ってください。これが初期にはインストールされておりませんようです(2021/05/31時点)。  
-その他の点に関してはほぼすべてUbuntuと同等の方法で環境構築が可能ですが、CentOS自体は状況がやや流動的なようです。
+その他の点に関してはほぼすべてUbuntuと同等の方法で環境構築が可能ですが、CentOS自体の状況がやや流動的なようです。
 
 ### htdocsフォルダへのvaccimageフォルダの移動
 ```
@@ -113,7 +115,7 @@ sudo chmod -R +r /opt/lampp/htdocs/vaccimage/
 などとし読み込みの権限を与えてください。
 
 ### MariaDBの設定
-次に、MariaDB(以下、MySQL)の設定について記載します。  
+次に、MariaDB(または、MySQL)の設定について記載します。  
 VaccImageは、初期設定ではパスワードは設定しておりませんが、運用時は設定することをおすすめします。  
 まず、
 ```
@@ -122,22 +124,9 @@ VaccImageは、初期設定ではパスワードは設定しておりません�
 とし、MySQLにログインしてください(このときも管理者権限が必要になります)。 
 次に、
 ```
-create database vaccimage;
-use vaccimage;
+\. /opt/lampp/htdocs/vaccimage/sql/initsetup.sql
 ```
-をしてください。「vaccimage」は小文字で、この名称は変更しないでください。  
-次に患者登録用(allmember.sql)、ワクチン接種歴登録用(vaccineall.sql)、バイアル入荷・修正歴登録用(countshusei.sql)のそれぞれのデータベースの登録を行います。
-このコマンドは、「Vaccimage」下層の「sql」フォルダにしまわれており下記を実行したら使用可能となります。
-```
-\. /opt/lampp/htdocs/vaccimage/sql/allmember.sql
-\. /opt/lampp/htdocs/vaccimage/sql/vaccineall.sql
-\. /opt/lampp/htdocs/vaccimage/sql/countshusei.sql
-```
-これら3つのデータベースを登録したあと、下記を実行してください。各ワクチンのViewの設定になります。
-```
-\. /opt/lampp/htdocs/vaccimage/sql/ViewSet.sql
-```
-現在の実装はインフルエンザワクチンのみ(2021年6月1日公開時点)ですが、ファイザーとモデルナ、アストラゼネカの新型コロナウイルス感染症のワクチンについても対応予定です。  
+をしてください。
 
 最後に、時間帯の設定変更を行います。  
 php.iniファイルの設定を変更することでUTCからAsia/Tokyoに時間帯の設定をできます。  
@@ -184,143 +173,8 @@ sudo /opt/lampp/xampp
 
 ### Windows10Pro環境下でのインストール
 
-
-### XAMPPインストール
-XAMPPのウェブサイトから.runファイルをダウンロードしてください。今回は、
-```
-xampp-linux-x64-8.0.6-0-installer.run
-```
-を、
-```
-~/Downloads
-```
-にダウンロードしました。  
-まずコマンドで、
-```
-chmod +x xampp-linux-x64-8.0.6-0-installer.run 
-```
-を実行して、.runファイルに実行権限を与えてから、  
-```
-sudo ./xampp-linux-x64-8.0.6-0-installer.run 
-```
-を行って.runファイルを走らせてください。これには管理者権限が必要になります。
-
-.runファイルの展開にはしばらく時間がかかります。(各種設定は初期設定のままで問題ないかと思われます)。  
-展開後、
-```
-http://localhost
-```
-をウェブブラウザで入力し、Xamppのトップページが立ち上がることを確認してください。これができていない場合はXAMPPのインストールができておりません。最初からやり直してください。  
-
-
-### htdocsフォルダへのvaccimageフォルダの移動
-```
-/opt/lampp/htdocs
-```
-への「vaccimage」フォルダのコピーも管理者権限を取得しないとできません(Windowsではとくに権限は不要なようです)。
-
-今回は、
-```
-~/Downloads
-```
-に「vaccimage」フォルダをダウンロードしました。
-
-htdocsは、
-```
-/opt/lampp/htdocs
-```
-である設定で話を進めます。  
-管理者権限でもって「vaccimage」フォルダをコピーするために、
-```
-sudo cp -r vaccimage/ /opt/lampp/htdocs
-```
-を実行してください。  
-これで「vaccimage」フォルダがhtdocs下層にコピーされました。  
-ここで、
-```
-http://localhost/vaccimage
-```
-を打鍵しTopPageが表示されたら良いのですが、表示されない場合は権限の変更が必要になります。   
-htdocs下層に落とした「vaccimage」フォルダについては権限が少なくとも、
-```
--r--r--r--
-```
-である必要があります(SEがPHPの編集をする場合は書き込み権限+wも必要です)。
-```
-sudo chmod -R +r /opt/lampp/htdocs/vaccimage/
-```
-などとし読み込みの権限を与えてください。
-
-### MariaDBの設定
-次に、MariaDB(以下、MySQL)の設定について記載します。  
-VaccImageは、初期設定ではパスワードは設定しておりませんが、運用時は設定することをおすすめします。  
-まず、
-```
- sudo /opt/lampp/bin/mysql
-```
-とし、MySQLにログインしてください(このときも管理者権限が必要になります)。 
-次に、
-```
-create database vaccimage;
-use vaccimage;
-```
-をしてください。「vaccimage」は小文字で、この名称は変更しないでください。  
-次に患者登録用(allmember.sql)、ワクチン接種歴登録用(vaccineall.sql)、バイアル入荷・修正歴登録用(countshusei.sql)のそれぞれのデータベースの登録を行います。
-このコマンドは、「Vaccimage」下層の「sql」フォルダにしまわれており下記を実行したら使用可能となります。
-```
-\. /opt/lampp/htdocs/vaccimage/sql/allmember.sql
-\. /opt/lampp/htdocs/vaccimage/sql/vaccineall.sql
-\. /opt/lampp/htdocs/vaccimage/sql/countshusei.sql
-```
-これら3つのデータベースを登録したあと、下記を実行してください。各ワクチンのViewの設定になります。
-```
-\. /opt/lampp/htdocs/vaccimage/sql/ViewSet.sql
-```
-現在の実装はインフルエンザワクチンのみ(2021年6月1日公開時点)ですが、ファイザーとモデルナ、アストラゼネカの新型コロナウイルス感染症のワクチンについても対応予定です。  
-
-最後に、時間帯の設定変更を行います。  
-php.iniファイルの設定を変更することでUTCからAsia/Tokyoに時間帯の設定をできます。  
-Ubuntuではphp.iniは、
-```
-/opt/lampp/etc/
-```
-に存在します。これをテキストエディタで開いて、
-```
-; Defines the default timezone used by the date functions
-; http://php.net/date.timezone
-date.timezone=UTC
-```
-の部分を*date.timezone=Asia/Tokyo*に変更してからXAMPPを再起動してください。  
-再起動後、ブラウザを立ち上げて、
-```
-http://localhost/dashboard/phpinfo.php
-
-```
-で*timezone*が*Asia/Tokyo*変更されていることを確認してください。  
-なお、初期から*Asia/Tokyo*になっている場合はもちろん変更は不要です。
-
-最後に、サーバー側のIPアドレスを固定し、取得してください。
-
-以上で、セットアップが完了します。  
-MySQLデータベースのバックアップは自動化しておりません。適宜、手動でバックアップするようにしてください。
-
-### XAMPPの起動方法
-サーバーの起動をしただけでは、XAMPPは立ち上がらないので、
-```
-sudo /opt/lampp/xampp start
-```
-を毎回、行ってください。  
-停止する場合は、
-```
-sudo /opt/lampp/xampp stop
-```
-を行ってください。  
-```
-sudo /opt/lampp/xampp
-```
-を行うと、XAMPPの機能一覧を見ることができます。
-
-
+Ubuntuを参考にしてセットアップを行ってください。 
+過去の設定方法は、「OldFiles」フォルダに画像を添付したPDFがありますので参考にしてください。
 
 
 
