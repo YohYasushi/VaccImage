@@ -208,83 +208,10 @@ http://192.168.10.13/vaccimage/
 
 ## 部署の設定について(難しいが重要)
 #### 2021/12/14記載 今後改善予定です。
-部署の選択肢が現時点ではHTMLのinputタグのList頼みになっていること。該当するページは、
-```
-http://localhost/vaccimage/PageOrderSearch.php
-http://localhost/vaccimage/PagePtRegistration.php
-http://localhost/vaccimage/PagePtSearch.php
-```
-です。いずれJSONなどからの読み込み、部分的なPHPからの読み込みなどで対応したいと考えております。従いまして、各SE、情報管理者に置かれましては各施設の部署や状況に応じて**直接HTMLを編集していただく**必要性があります。
-何れも修正箇所は、
-```
-<optgroup label="患者(職員家族含)">
-<option value=""></option>
-<option value="外来患者">外来患者</option>
-<option value="入院患者">入院患者</option>
-<option value="職員家族">職員家族</option>
-</optgroup>
-<optgroup label="職員">
-<option value="外来・救急">外来・救急</option>
-<option value="病棟">病棟</option>
-<option value="医局">医局</option>
-<option value="医事課">医事課</option>
-</optgroup>
-```
-に該当する部分です。HTMLの参考書などをみて各病院の状況に応じてListを変更してください。
 
 ### バイアル数のカウントのページについて(やや難しい)
 #### 2021/12/14記載 今後改善予定です。
-現在、バイアル数カウントで動かしているのは、
-```
-http://localhost/vaccimage/PageShowInfluenzaResult.php
-```
-のみですが、このページは設定がややこしいので別に項を設けて説明します。  
-このページは、
-```
-【！修正箇所！】
-```
-タグの部分を編集して使用していただくことになります。  
-具体的には、
-```
-$startDate = '2021-05-01';
-$goalDate = '2021-06-30';   //【！修正箇所！】ここでカウント期間開始日と終了日つまり期間の指定をする(期間外のバイアル、接種者はいっさいカウントされません。)
-```
-の"$startDate"と"$goalDate"の修正を行ってください。  
-この開始日と終了日は各施設の状況に応じて設定が必須となります！  
-以下の修正箇所は、アプデを待っていただくのでも構いませんが。
 
-```
-$sql = "SELECT * FROM CountInfluenza WHERE ( vaccdate >= '$startDate' AND vaccdate <= '$goalDate' ) ORDER BY vaccdate ASC; ";  
-    //【！修正箇所！】ここで引用するViewを指定してください。インフル: CountInfluenza、ファイザー: CountPFECOVID19、モデルナ: CountMRNACOVID19、アストラゼネカ: CountAZNCOVID19
-```
-の"CountInfluenza"を適用したいワクチン種に変更してください。
-
-```
-//【！修正箇所！】ここでrとnの設定
-$r = 2; //ratio インフルなら投与量が大人:子供=2:1 なので r=2 です。
-$n = 2; //1バイアルで接種可能な大人の人数　インフルは2人なのでn=2です。
-//インフルエンザは1バイアルから大人2人、小人4人、で計算しております。関数をよくみてワクチン種によって変更を。
-```
-の"$r"と"$n"の修正を行ってください。
-
-```
-
-$sql = "SELECT * FROM CountInfluenzaV WHERE ( shuseidate >= '$startDate' AND shuseidate <= '$goalDate')  ORDER BY shuseidate ASC;"; 
-//【！修正箇所！】ここで引用するViewを指定してください。インフル: CountInfluenzaV、ファイザー: CountPFECOVID19V、モデルナ: CountMRNACOVID19V、アストラゼネカ: CountAZNCOVID19V
-```
-```
-$sql = "SELECT shuseidate, sum(shuseicount) FROM CountInfluenzaV WHERE ( shuseidate >= '$startDate' and shuseidate <= '$goalDate') GROUP BY shuseidate ORDER BY shuseidate ASC;";
-//【！修正箇所！】ここで引用するViewを指定してください。インフル: CountInfluenzaV、ファイザー: CountPFECOVID19V、モデルナ: CountMRNACOVID19V、アストラゼネカ: CountAZNCOVID19V
-```
-のCountInfluenzaVの修正、を適宜行ってください。
-
-これらの箇所を修正していただくことになります。  
-なお修正する場合は、
-```
-chmod +r /opt/lampp/htdocs/vaccimage/PageShowInfluenzaResult.php
-```
-をして書き込み権限を与えてからにしてください。  
-上記、とくにカウント区切りの日付の変更は運用上必須となるのでよく確認してください。
 
 ### その他の注意点
 - 年齢のカウントは公的機関で用いられるような厳密なものではありません。あくまで目安です。
@@ -292,11 +219,11 @@ chmod +r /opt/lampp/htdocs/vaccimage/PageShowInfluenzaResult.php
 - 患者IDのチェックディジットは設けておりません。各施設の患者ID登録状況に応じて設けることもできます。
 
 # Q&A
-- サーバー側がWindowsOSでの稼働を確認していない理由は？  
+- サーバー側がWindowsServerOSでの稼働を保障していない理由は？  
  -> WindowsServerが非常に高価であることと、通常のWindowsのHomeやProではサーバー機能を有していないため(非公式情報Windowsは同時アクセス台数が10台までに制限されているとのこと)。Windows10Proでの接続台数が限られた環境での稼働は確認しております。
 
 - インフルエンザワクチン以外への対応は？  
- -> いずれ実装予定です。ファイザー、モデルナ、アストラゼネカの新型コロナウイルス感染症ワクチンに対応したいと考えております。肺炎ワクチンへの対応予定はありません。
+ -> いずれ実装予定です。ファイザー、モデルナ、アストラゼネカの新型コロナウイルス感染症ワクチンに対応したいと考えております。肺炎球菌ワクチンへの対応予定はありません。
 
 - 予約入力数の制限機能は？  
  -> 現時点ではありません。実装も難しいかもしれません。未来日の予約入力数の制限があればいいのですが…。
