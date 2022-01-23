@@ -81,7 +81,8 @@ sudo yum install libnsl
 ```
 /opt/lampp/htdocs
 ```
-への「vaccimage」フォルダのコピーも管理者権限を取得しないとできません(Windowsではとくに権限は不要なようですが)。
+への「vaccimage」フォルダのコピーも管理者権限を取得しないとできません(Windowsではとくに権限は不要なようですが)。  
+なお、「vaccimage」フォルダは、  [VaccImage](https://github.com/YohYasushi/VaccImage/tree/main/vaccimage "VaccImage") から落としてください。  
 
 今回は、
 ```
