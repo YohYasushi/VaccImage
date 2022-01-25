@@ -31,11 +31,11 @@ and (funcChckList($vacc_event,'SELECT vacc_event FROM vaccineevents;', 'vacc_eve
 
   try {
     $stt = $db->prepare('INSERT INTO vaccineorders(vacc_date, ptid, vacc_symbol, vacc_event, vacc_memo) VALUES(:vacc_date, :ptid, :vacc_symbol, :vacc_event, :vacc_memo)');
-    $stt->bindValue(':vacc_date', $_POST['vacc_date']);
-    $stt->bindValue(':ptid', $_POST['ptid']);
-    $stt->bindValue(':vacc_symbol', $_POST['vacc_symbol']);
-    $stt->bindValue(':vacc_event', $_POST['vacc_event']);
-    $stt->bindValue(':vacc_memo', $_POST['vacc_memo']);
+    $stt->bindValue(':vacc_date', $vacc_date);
+    $stt->bindValue(':ptid', $ptid);
+    $stt->bindValue(':vacc_symbol', $vacc_symbol);
+    $stt->bindValue(':vacc_event', $vacc_event);
+    $stt->bindValue(':vacc_memo', $vacc_memo);
     $stt->execute();
     $db->commit();
   

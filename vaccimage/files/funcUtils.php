@@ -4,7 +4,7 @@
 
 // 空欄判定 Trimしても0なら空欄 1ならなんかある ってこと。
 function funcEmptyJudge(string $value): int {
-  $value = trim($value); //funcTrimFormsHでもTrimしているけど漏れ防止のため
+//  $value = trim($value); //funcTrimFormsHでもTrimしているけど漏れ防止のため
   if ($value != null) {
     $isEmpty = 1;
    }
@@ -39,7 +39,7 @@ function funcChkDate(string $value): int {
   return $isDate;
 };
 
-//LISTMAKEに関して、SQLの中に含まれているかどうかのチェック
+//LISTMAKEに関して、SQLの中に含まれているかどうかの判定
 function funcChckList(string $value ,string $a, string $b): int
 {
 $ArraySQL = array();
@@ -72,7 +72,7 @@ function funcCvrtEncode(string $value): string {
     $result = $value;
   }
   else{
-    $result = mb_convert_encoding($value, 'UTF-8',  'Shift-JIS');
+    $result = mb_convert_encoding($value, 'UTF-8', 'Shift-JIS');
   }
   return $result;
 };
@@ -86,9 +86,11 @@ function h(string $value): string {
 
 // 頭とケツの空白を消去した機能を追加+h関数を追加した『Trimの最終の関数』
 function funcTrimFormsH(string $value): string {
-  $value = funcCvrtEncode($value);
-  $result = trim($value);
-  $result = h($result);
+  $value = funcCvrtEncode($value); //UTF-8に変換
+  $value = str_replace('　', ' ', $value); //全角スペースを半角にす
+  $value = mb_convert_kana($value, "KVa"); //半角カタカナの全角化+全角英数字の半角化
+  $value = trim($value); //半角のTrim
+  $result = h($value);
   return $result;
 };
 

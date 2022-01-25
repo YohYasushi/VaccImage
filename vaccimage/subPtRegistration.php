@@ -7,6 +7,8 @@
 $db = getDb();
 $db->beginTransaction(); 
 
+
+
 $ptid = funcTrimFormsH($_POST['ptid']);
 $last_name = funcTrimFormsH($_POST['last_name']);
 $first_name = funcTrimFormsH($_POST['first_name']);
@@ -14,6 +16,9 @@ $birthday = funcTrimFormsH($_POST['birthday']);
 $ptype_symbol = funcTrimFormsH($_POST['ptype_symbol']);
 $dpts_symbol = funcTrimFormsH($_POST['dpts_symbol']);
 // ここでトリム関数でふるいにかけたあと値を代入
+
+echo $last_name;
+echo $firts_name;
 
 $FullHantei
 = funcEmptyJudge($ptid)
@@ -34,12 +39,12 @@ and (funcChckList($dpts_symbol,'SELECT dpts_symbol FROM departments;', 'dpts_sym
 
   try {
     $stt = $db->prepare('INSERT INTO allmembers(ptid, last_name, first_name, birthday, ptype_symbol, dpts_symbol) VALUES(:ptid, :last_name, :first_name, :birthday , :ptype_symbol, :dpts_symbol)');
-    $stt->bindValue(':ptid', $_POST['ptid']);
-    $stt->bindValue(':last_name', $_POST['last_name']);
-    $stt->bindValue(':first_name', $_POST['first_name']);
-    $stt->bindValue(':birthday', $_POST['birthday']);
-    $stt->bindValue(':ptype_symbol', $_POST['ptype_symbol']);
-    $stt->bindValue(':dpts_symbol', $_POST['dpts_symbol']);
+    $stt->bindValue(':ptid', $ptid);
+    $stt->bindValue(':last_name', $last_name);
+    $stt->bindValue(':first_name', $first_name);
+    $stt->bindValue(':birthday', $birthday);
+    $stt->bindValue(':ptype_symbol', $ptype_symbol);
+    $stt->bindValue(':dpts_symbol', $dpts_symbol);
     $stt->execute();
     $db->commit();
     echo "患者データを" , $stt->rowCount(),  "件、挿入しました。タブを閉じてください。<br>";

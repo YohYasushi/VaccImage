@@ -32,11 +32,11 @@ and is_numeric($vacccount_count) == true
 
   try {
     $stt = $db->prepare('INSERT INTO vaccinecountsshusei (vacc_date, vacc_type, vacccount_event, vacccount_count, vacccount_memo) VALUES(:vacc_date, :vacc_type, :vacccount_event, :vacccount_count, :vacccount_memo)');
-    $stt->bindValue(':vacc_date', $_POST['vacc_date']);
-    $stt->bindValue(':vacc_type', $_POST['vacc_type']);
-    $stt->bindValue(':vacccount_event', $_POST['vacccount_event']);
-    $stt->bindValue(':vacccount_count', $_POST['vacccount_count']);
-    $stt->bindValue(':vacccount_memo', $_POST['vacccount_memo']);
+    $stt->bindValue(':vacc_date', $vacc_date);
+    $stt->bindValue(':vacc_type', $vacc_type);
+    $stt->bindValue(':vacccount_event', $vacccount_event);
+    $stt->bindValue(':vacccount_count', $vacccount_count);
+    $stt->bindValue(':vacccount_memo', $vacccount_memo);
     $stt->execute();
     $db->commit();
     echo "カウント修正データを" , $stt->rowCount(),  "件、挿入しました。タブを閉じ、元の画面の「画面更新」ボタンを押してください。<br>";
