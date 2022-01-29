@@ -54,7 +54,7 @@ xampp-linux-x64-X.X.X-X-installer.run
 にダウンロードしました(Xはバージョン)。  
 まずコマンドで、
 ```
-chmod +x xampp-linux-x64-8.0.6-0-installer.run 
+chmod +x xampp-linux-x64-X.X.X-X-installer.run 
 ```
 を実行して、.runファイルに実行権限を与えてから、  
 ```
@@ -107,15 +107,21 @@ sudo cp -r vaccimage/ /opt/lampp/htdocs
 http://localhost/vaccimage
 ```
 を打鍵しTopPageが表示されたら良いのですが、表示されない場合は権限の変更が必要になります。   
-htdocs下層に落とした「vaccimage」フォルダについては権限が少なくとも、
+htdocs下層に落とした「vaccimage」フォルダについては権限を変更する必要があります(管理者がPHPの編集をする場合は書き込み権限+wも必要です)。
+
 ```
--r--r--r--
+sudo chmod -R 777 /opt/lampp/htdocs/vaccimage/
 ```
-である必要があります(管理者がPHPの編集をする場合は書き込み権限+wも必要です)。
+
+などとし読み込みの権限を与えてください。  
+ただし、ファイルの編集終了後は、
+
 ```
-sudo chmod -R +r /opt/lampp/htdocs/vaccimage/
+sudo chmod -R 755 /opt/lampp/htdocs/vaccimage/
 ```
-などとし読み込みの権限を与えてください。
+
+とし、書き換えが不可能なようにしてください。  
+
 
 ### MariaDBの設定
 次に、MariaDB(または、MySQL)の設定について記載します。  
